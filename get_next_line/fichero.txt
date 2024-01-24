@@ -1,0 +1,3 @@
+hola cositas lindas
+salto de linea '\n'
+final de cadena '0'
