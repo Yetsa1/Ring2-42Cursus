@@ -6,7 +6,7 @@
 /*   By: yeparra- <yeparra-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 17:17:51 by yeparra-          #+#    #+#             */
-/*   Updated: 2024/01/24 12:29:32 by yeparra-         ###   ########.fr       */
+/*   Updated: 2024/02/16 14:26:23 by yeparra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,18 @@
 # include <limits.h>
 # include <fcntl.h>
 # include <stdlib.h>
+# include <string.h>
 
 
 # ifndef BUFFER_SIZE
-#  define  BUFFER_SIZE 21
+#  define  BUFFER_SIZE 100
 # endif
 
 
-size_t	ft_strlen(const	char *s);
 char    *get_next_line(int fd);
+int	ft_strlen(const char *s);
+int	ft_strncmp(const char *s, const char *t, size_t n);
+size_t	ft_strcpy(char *s, char *ct,  size_t n);
+void	*ft_memmove(void *s, const void *ct, size_t n);
 
 #endif

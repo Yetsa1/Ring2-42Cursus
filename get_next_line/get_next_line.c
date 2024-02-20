@@ -6,35 +6,54 @@
 /*   By: yeparra- <yeparra-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 17:18:02 by yeparra-          #+#    #+#             */
-/*   Updated: 2024/01/24 13:13:43 by yeparra-         ###   ########.fr       */
+/*   Updated: 2024/02/19 17:23:58 by yeparra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char    *get_next_line(int fd)
+char    *read_line(int fd)
 {
     static char *buffer;
+    int nbytes;
+
+    buffer = malloc(BUFFER_SIZE * sizeof(char));
+    if (buffer == NULL)
+        return (NULL);
+
+    nbytes = read(fd, buffer, BUFFER_SIZE);
+    if (nbytes <= 0)
+    {
+        free(buffer);
+        return (NULL);
+    }
+    buffer[nbytes] = '\0';
+    return (buffer);
+}
+char    *get_next_line(int fd)
+{
     char        *line;
-    size_t         nbytes;
+    char    *buffer;
     int i;
     
-    nbytes = fd;
+    buffer = read_line(fd);
     if (buffer == NULL)
+        return (NULL);
+    line = malloc(BUFFER_SIZE + 1);   
+    if (line == NULL)
     {
-        return (NULL);    
+        free (buffer);
+        return (NULL);
     }
-    buffer = malloc((BUFFER_SIZE) * sizeof(char) + 1);
-    line = ft_strlen(buffer);    
-    i = 0; 
-    while(line == "\0")
+    i = 0;
+    while (buffer[i] != '\n' && buffer[i] != '\0')
     {
-        read(fd, buffer, nbytes);
+        line[i] = buffer[i];
         i++;
     }
-    //line[0] = '\0';
-    //bytes = read(fd, buffer, BUFFER_SIZE);    
-    buffer[nbytes] = '\0';
+    line[i] = '\0';
+
+    ft_memmove(buffer, buffer + i + 1, ft_strlen(buffer + i + 1) + 1);
     return (line);
 }
 
@@ -43,10 +62,19 @@ int main(void)
     int     fd;
     char    *line;
 
-    line = NULL;
+    get_next_line(-4);
+    fd = 0;
+    if (fd == -1)
+        return (-1);
     fd = open("fichero.txt", O_RDONLY);
-    line = get_next_line(fd);
-    printf("%s", line);
+    line = "";
+    while(line != NULL)
+    {
+        line = get_next_line(fd);
+        printf("%s\n", line);
+        //free(line);
+    }
+    fd = close(fd);
     return (0);
 }
 

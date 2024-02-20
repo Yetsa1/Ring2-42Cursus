@@ -1,3 +1,15 @@
+El buffer es un espacio temporal de memoria física el cual
+se usa para almacenar información mientras se envía de un
+lado a otro. Los buffers se pueden encontrar en todo tipo de
+dispositivos electrónicos, desde el nivel de circuitos hasta
+el nivel de la comunicación entre dispositivos como por ejemplo
+en el funcionamiento de internet. Los buffers son tan comunes por
+su función, que es paliar la diferencia de velocidad de transmisión
+o procesamiento entre dos dispositivos o procesos por eso están por
+todos lados en un ordenador: en discos duros, procesadores, RAM,
+impresoras… y su tamaño y características pueden afectar al
+rendimiento del dispositivo.
+
 hola cositas lindas
 salto de linea '\n'
 final de cadena '0'
